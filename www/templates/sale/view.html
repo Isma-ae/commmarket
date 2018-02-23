@@ -1,0 +1,48 @@
+<ion-view title="ขาย">
+	<ion-content class="padding my-content">
+		<div class="list" style="padding-bottom:10px;">
+			<!--<div class="item item-image" ng-repeat="(x, v) in product.images">
+				<img ng-src="{{ URL+'files/products_temp/'+v.image }}" err-src="img/no-image.png">
+			</div>-->
+			<div style="padding:10px 20px 0;">
+				<ion-slide-box auto-play="true" does-continue="true" show-pager="true">
+					<ion-slide class="swiper-slide swiper-slide-active" ng-repeat="(x, v) in product.images">
+						<img ng-src="{{ URL+'files/products_temp/'+v.image }}">
+					</ion-slide>
+				</ion-slide-box>
+			</div>
+
+			<div class="item">
+				<button class="button button-block button-assertive button-outline" ng-click="upload()">
+					<span class="icon ion-ios-cloud-upload"></span> อัพโหลดรูป</button>
+			</div>
+			<label class="item item-input">
+				<span class="input-label">ชื่อสินค้า</span>
+				<input type="text" ng-model="product.p_name" class="text-right" placeholder="ระบุชื่อสินค้า...">
+			</label>
+			<label class="item item-input item-select">
+				<div class="input-label">
+					เลือกประเภทสินค้า
+				</div>
+				<select ng-model="product.p_category">
+					<option ng-repeat="(i, v) in product.p_category_source" value="{{ v.cat_id }}">{{ v.cat_name }}</option>
+				</select>
+			</label>
+			<label class="item item-input">
+				<span class="input-label">รายละเอียด</span>
+				<textarea ng-model="product.p_description" class="text-right" placeholder="ระบุรายละอียดสินค้า..."></textarea>
+			</label>
+			<label class="item item-input">
+				<span class="input-label">ราคา</span>
+				<input type="number" ng-model="product.p_price" class="text-right">
+			</label>
+			<label class="item item-input">
+				<span class="input-label">สต็อกคงเหลือ</span>
+				<input type="number" ng-model="product.p_stock" class="text-right">
+			</label>
+			<div class="item">
+				<button class="button button-block button-assertive" ng-click="save()">บันทึก</button>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

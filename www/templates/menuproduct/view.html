@@ -1,0 +1,42 @@
+<ion-view title="สินค้า">
+	<ion-content class="has-header my-content">
+		<div class="button-bar">
+			<a href="#/page6" class="button button-stable button-block  icon-left ion-android-funnel">Filter</a>
+			<a href="#/page7" class="button button-stable button-block  icon ion-android-restaurant">Sort</a>
+        </div>
+		<div class="row" ng-repeat="item in menu_items" ng-if="$index % 2 === 0">
+            <div class="col col-50 " ng-if="$index < menu_items.length" style="padding:1px;border:1px solid rgb(248, 245, 245);">
+                <div class="item item-image" style="border-width: 0px; border-style: none;">
+                    <img ng-click="showProductInfo(menu_items[$index].p_id)"
+                        ng-src="img/{{menu_items[$index].p_image_id}}" height="180px" />
+                </div>
+                <a class="item item-icon-right assertive" href="javascript:void(0)" style="border-width: 0px; border-style: none;">
+                    <p ng-click="showProductInfo(menu_items[$index].p_id)"
+                        style="font-size: 12px;text-align:left;">
+                        {{menu_items[$index].p_name}}
+                        <br/>
+                        <span style="font-weight: bold;color: black;">ราคา {{menu_items[$index].p_price}} บาท</span>
+                    </p>
+                    <i style="font-size: 25px; margin-right:0px;right:0px;" ng-click="addCart(menu_items[$index].p_id,menu_items[$index].p_image_id,menu_items[$index].p_name,menu_items[$index].p_price)"
+                        class="icon ion-ios-cart"></i>
+                </a>
+            </div>
+            <div class="col col-50 " ng-if="$index+1  < menu_items.length" style="padding:1px;border:1px solid rgb(248, 245, 245);">
+                <div class="item item-image" style="border-width: 0px; border-style: none;">
+                    <img ng-click="showProductInfo(menu_items[$index+1].p_id)"
+                        ng-src="img/{{menu_items[$index+1].p_image_id}}" height="180px" />
+                </div>
+                <a class="item item-icon-right assertive" href="javascript:void(0)" style="border-width: 0px; border-style: none;">
+                    <p ng-click="showProductInfo(menu_items[$index+1].p_id)"
+                        style="font-size: 12px;text-align:left;">
+                        {{menu_items[$index+1].p_name}}
+                        <br/>
+                        <span style="font-weight: bold;color: black;">ราคา {{menu_items[$index+1].p_price}} บาท</span>
+                    </p>
+                    <i style="font-size: 25px;right: 0px;" ng-click="addCart(menu_items[$index+1].p_id,menu_items[$index+1].p_image_id,menu_items[$index+1].p_name,menu_items[$index+1].p_price)"
+                        class="icon ion-ios-cart"></i>
+                </a>
+            </div>
+        </div>
+	</ion-content>
+</ion-view>

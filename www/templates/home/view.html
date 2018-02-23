@@ -1,0 +1,61 @@
+<ion-view title="CommMarket">
+    <div class="bar bar-subheader bar-orange item-input-inset">
+        <label class="item-input-wrapper my-label">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+            <input type="search" placeholder="Search">
+        </label>
+    </div>
+    <ion-content class="has-subheader has-tabs my-content">
+        <ion-slide-box auto-play="true" does-continue="true" show-pager="true">
+            <ion-slide class="swiper-slide swiper-slide-active" style="width:100%; height: 50%; " ng-repeat="slide in slide_items">
+                <div>
+                    <img ng-src="{{'img/'+ slide.p_image_id +'.jpg'}}">
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+        <h4 style="font-family: 'Prompt', sans-serif; margin-left: 10px">หมวดหมู่</h4>
+        <div>
+            <ion-scroll class="categories" direction="x">
+                <div class="item" ng-repeat="item in category" style="padding-top:5px;padding-right:5px;padding-left:5px;text-align:center;">
+                    <img ng-src="{{ URL+'files/categories/'+item.cat_img }}" err-src="img/no-image.png" ng-click="showProduct(item)">
+                    <p>{{ item.cat_name }}</p>
+                </div>
+            </ion-scroll>
+        </div>
+        <h4 style="font-family: 'Prompt', sans-serif; margin-left: 10px">สินค้าแนะนำ</h4>
+        <div>
+            <div ng-repeat="(i, item) in product" class="row" ng-if="i % 2 == 0">
+                <div class="col col-50" ng-if="i<product.length" style="padding:1px;border:1px solid rgb(248, 245, 245);">
+                    <div class="item item-image" style="border-width: 0px; border-style: none;">
+                        <img ng-click="showProductInfo(product[i])" ng-src="{{ URL+'files/products/'+product[i].p_image }}" err-src="img/no-image.png"
+                            height="180px" />
+                    </div>
+                    <a class="item item-icon-right assertive" style="border-width: 0px; border-style: none;">
+                        <p ng-click="showProductInfo(product[i])" style="font-size: 12px;text-align:left;">
+                            {{product[i].p_name}}
+                            <br/>
+                            <span style="font-weight: bold;color: black;">ราคา {{product[i].p_price}} บาท</span>
+                        </p>
+                        <i style="font-size: 25px; margin-right:0px;right:0px;" ng-click="addCart(product[i])" class="icon ion-ios-cart"></i>
+                    </a>
+                </div>
+                <div class="col col-50" ng-if="i+1<product.length" style="padding:1px;border:1px solid rgb(248, 245, 245);">
+                    <div class="item item-image" style="border-width: 0px; border-style: none;">
+                        <img ng-click="showProductInfo(product[i+1])" ng-src="{{ URL+'files/products/'+product[i+1].p_image }}" err-src="img/no-image.png"
+                            height="180px" />
+                    </div>
+                    <a class="item item-icon-right assertive" style="border-width: 0px; border-style: none;">
+                        <p ng-click="showProductInfo(product[i+1])" style="font-size: 12px;text-align:left;">
+                            {{product[i+1].p_name}}
+                            <br/>
+                            <span style="font-weight: bold;color: black;">ราคา {{product[i+1].p_price}} บาท</span>
+                        </p>
+                        <i style="font-size: 25px;right: 0px;" ng-click="addCart(product[i+1])" class="icon ion-ios-cart"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll ng-if="isMoreProductGuide" on-infinite="getProductGuide(1)" distance="1%">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

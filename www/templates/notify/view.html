@@ -1,0 +1,10 @@
+<ion-view title="แจ้งเตือน">
+	<ion-content class="has-header my-content">
+		แจ้งเตือน
+		<ion-list>
+			<ion-item ng-repeat="x in data">{{ x }}</ion-item>
+		</ion-list>
+		<ion-infinite-scroll on-infinite="getProductGuide()" distance="1%">
+        </ion-infinite-scroll>
+	</ion-content>
+</ion-view>

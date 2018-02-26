@@ -2,7 +2,12 @@ angular.module('app.routes', [])
     .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
         $ionicConfigProvider.tabs.position('bottom');
         $stateProvider
-            
+
+            .state('blank', {
+                url: '/blank',
+                abstract: true,
+                templateUrl: 'templates/blank.html'
+            })
             .state('tab', {
                 url: '/tab',
                 abstract: true,
@@ -62,11 +67,8 @@ angular.module('app.routes', [])
                     }
                 }
             })
-            .state('cart', {
-                url: '/cart',
-                templateUrl: 'templates/cart/view.html',
-                controller: 'cartCtrl'
-            })
+
+
             .state('tab.product', {
                 url: '/product/:id',
                 views: {
@@ -86,14 +88,20 @@ angular.module('app.routes', [])
                 }
             })
 
-            .state('tab.checkOut', {
+            .state('blank.cart', {
+                url: '/cart',
+                templateUrl: 'templates/cart/view.html',
+                controller: 'cartCtrl'
+            })
+            .state('blank.checkOut', {
                 url: '/checkOut',
-                views: {
-                    'tab-home': {
-                        templateUrl: 'templates/checkOut/view.html',
-                        controller: 'checkOutCtrl'
-                    }
-                }
+                templateUrl: 'templates/checkOut/view.html',
+                controller: 'checkOutCtrl'
+            })
+            .state('blank.paybillSuccess', {
+                url: '/paybillSuccess/:order_doc',
+                templateUrl: 'templates/paybillSuccess/view.html',
+                controller: 'paybillSuccessCtrl'
             })
 
 

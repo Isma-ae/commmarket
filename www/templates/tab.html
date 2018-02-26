@@ -1,4 +1,12 @@
-<ion-tabs class="tabs-icon-top tabs-color-active-orange">
+<ion-nav-bar class="bar-energized bar-orange">
+    <ion-nav-back-button side="left" class="button-icon icon ion-ios-arrow-left button-clear text-white"></ion-nav-back-button>
+    <ion-nav-buttons side="right">
+        <a class="button button-icon ion-ios-cart-outline has-badge my-icon" href="#/blank/cart">
+            <span class="badge badge-assertive" ng-show="cart.qty>0">{{ cart.qty }}</span>
+        </a>
+    </ion-nav-buttons>
+</ion-nav-bar>
+<ion-tabs class="tabs-icon-top tabs-color-active-energized tabs-color-active-orange">
     <ion-tab title="หน้าแรก" icon-off="ion-ios-home-outline" icon-on="ion-ios-home" href="#/tab/home">
         <ion-nav-view name="tab-home"></ion-nav-view>
     </ion-tab>
@@ -8,7 +16,7 @@
     <ion-tab title="ขาย" icon-off="ion-ios-camera-outline" icon-on="ion-ios-camera" href="#/tab/sale">
         <ion-nav-view name="tab-sale"></ion-nav-view>
     </ion-tab>
-    <ion-tab title="แจ้งเตือน" icon-off="ion-ios-bell-outline" icon-on="ion-ios-bell" href="#/tab/notify">
+    <ion-tab title="แจ้งเตือน" icon-off="ion-ios-bell-outline" icon-on="ion-ios-bell" href="#/tab/notify" badge="qty" badge-style="badge-assertive">
         <ion-nav-view name="tab-notify"></ion-nav-view>
     </ion-tab>
     <ion-tab title="ฉัน" icon-off="ion-ios-person-outline" icon-on="ion-ios-person" href="#/tab/account">

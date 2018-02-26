@@ -40,59 +40,64 @@ angular.module('app.controllers')
             }, true);
         }
         $scope.upload = function () {
-            var hideSheet = $ionicActionSheet.show({
-                titleText: 'อัพโหลดรูปภาพ',
-                buttons: [
-                    { text: '<i class="ion ion-camera"></i> ถายรูป' },
-                    { text: '<i class="ion ion-images"></i> เลือกจากอัลบั้ม' }
-                ],
-                buttonClicked: function (index) {
-                    var pic_source = Camera.PictureSourceType.CAMERA;
-                    if(index==0) pic_source = Camera.PictureSourceType.CAMERA;
-                    if(index==1) pic_source = Camera.PictureSourceType.SAVEDPHOTOALBUM;
-                    var options = {
-                        destinationType: Camera.DestinationType.FILE_URI,
-                        sourceType: pic_source,
-                        allowEdit: true,
-                        targetWidth: 1000,
-                        targetHeight: 1000,
-                        encodingType: Camera.EncodingType.JPEG,
-                        mediaType: Camera.MediaType.PICTURE,
-                        correctOrientation: true
-                    };
-                    $cordovaCamera.getPicture(options).then(function(imageURI) {
-                        upload(imageURI);
-                    }, function(err) {
-                    });
-                    return true;
-                }
-            });
-            var upload = function(imageURI) {
-                var server = $rootScope.URL+"product_image_temp_add.php";
-                var filePath = imageURI;
-                var options = {
-                    fileKey: "file",
-                    params: {
-                        u_id: $rootScope.USER.u_id
-                    }
-                };
-                $cordovaFileTransfer.upload(server, filePath, options)
-                    .then(function(result) {
-                        if( result.response=="Y" ) {
-                            getProductImageTemp();
-                        } else {
-                            getProductImageTemp();
-                            $ksFactory.alert("Error เนื่องจาก "+result.response);
-                        }
-                    }, function(err) {
-                        $ksFactory.alert("Error เนื่องจาก "+$rootScope.MESSAGE.ERROR1);
-                    }, function (progress) {
-                        $timeout(function () {
-                            $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+            if( !$rootScope.DEVICE.platform ) {
+                $ksFactory.alert("No device.");
+                //var form = document.createElement("input");
+            } else {
+                var hideSheet = $ionicActionSheet.show({
+                    titleText: 'อัพโหลดรูปภาพ',
+                    buttons: [
+                        { text: '<i class="ion ion-camera"></i> ถายรูป' },
+                        { text: '<i class="ion ion-images"></i> เลือกจากอัลบั้ม' }
+                    ],
+                    buttonClicked: function (index) {
+                        var pic_source = Camera.PictureSourceType.CAMERA;
+                        if(index==0) pic_source = Camera.PictureSourceType.CAMERA;
+                        if(index==1) pic_source = Camera.PictureSourceType.SAVEDPHOTOALBUM;
+                        var options = {
+                            destinationType: Camera.DestinationType.FILE_URI,
+                            sourceType: pic_source,
+                            allowEdit: true,
+                            targetWidth: 1000,
+                            targetHeight: 1000,
+                            encodingType: Camera.EncodingType.JPEG,
+                            mediaType: Camera.MediaType.PICTURE,
+                            correctOrientation: true
+                        };
+                        $cordovaCamera.getPicture(options).then(function(imageURI) {
+                            upload(imageURI);
+                        }, function(err) {
                         });
-                    });
+                        return true;
+                    }
+                });
             }
         };
+        var upload = function(imageURI) {
+            var server = $rootScope.URL+"product_image_temp_add.php";
+            var filePath = imageURI;
+            var options = {
+                fileKey: "file",
+                params: {
+                    u_id: $rootScope.USER.u_id
+                }
+            };
+            $cordovaFileTransfer.upload(server, filePath, options)
+                .then(function(result) {
+                    if( result.response=="Y" ) {
+                        getProductImageTemp();
+                    } else {
+                        getProductImageTemp();
+                        $ksFactory.alert("Error เนื่องจาก "+result.response);
+                    }
+                }, function(err) {
+                    $ksFactory.alert("Error เนื่องจาก "+$rootScope.MESSAGE.ERROR1);
+                }, function (progress) {
+                    $timeout(function () {
+                        $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+                    });
+                });
+        }
         $scope.save = function () {
             if( $scope.product.p_name=="" ) {
                 $ksFactory.alert("p_name impty.");

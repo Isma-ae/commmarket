@@ -1,7 +1,8 @@
 angular.module('app.controllers')
     .controller('homeCtrl', function($rootScope,$scope,$http,$state,$location,$ionicHistory,$ksFactory,$cart,$timeout) {
         //alert("Home");
-        $scope.slide_items=[    
+
+        $scope.slide_items=[
             {
                 "p_id":"1",
                 "p_image_id":"ecommerce",
@@ -33,7 +34,7 @@ angular.module('app.controllers')
             }, true);
         }
         $scope.getProductGuide = function(mode) {
-            $ksFactory.http($rootScope.URL+'product_guide_get.php', { 
+            $ksFactory.http($rootScope.URL+'product_guide_get.php', {
                 num: $scope.product.length,
                 mode: mode
             }, function(res) {
@@ -54,13 +55,12 @@ angular.module('app.controllers')
 		    $location.path("/tab/menuproduct/"+product.cat_id);
 	    };
         $scope.showProductInfo = function(product) {
+            //$state.go("tab.product", {id: product.p_id} );
 		    $location.path("/tab/product/"+product.p_id);
 	    };
 	    $scope.addCart = function(product) {
             $cart.add($rootScope.USER, product.p_id);
         };
-
-
         $scope.$on('$ionicView.enter', function(scopes, states) {
             $scope.getCategory();
             $scope.getProductGuide(2);

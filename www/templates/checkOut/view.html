@@ -1,39 +1,43 @@
 <ion-view title="Check Out">
     <ion-content padding="'true'" class="has-header">
-		<div ng-show="loggedin()" >
-			<div class="button-bar">
-				<a href="#/page4" class="button button-balanced button-block ">Login</a>
-				<a href="#/page5" class="button button-calm button-block ">Register</a>
-			</div>
-			<div>
-				<p>Or</p>
-			</div>
-		</div>
-        <form class="list">
-            <label class="item item-input">
-                <span class="input-label" style="padding-right:75px">Name*</span>
-                <textarea placeholder="" > {{" "+loggedin_name}}</textarea>
+        <h3>ที่อยู่จัดส่ง</h3>
+        <!--<ion-list>
+            <ion-checkbox ng-repeat="(i,v) in data.address" ng-model="data.address[i].value" class="item item-text-wrap item-icon-right" ng-click="selectAddress(i)">
+                <p><b>ชื่อ-นามสกุลผู้รับ</b> : {{ v.u_name }}</p>
+                <p><b>ที่อยู่จัดส่ง</b> : {{ v.u_address }}</p>
+                <p><b>เบอร์โทร</b> : {{ v.u_phone }}</p>
+                <a ng-click="manageAddress()" class="button button-icon icon ion-ios-gear-outline"></a>
+            </ion-checkbox>
+        </ion-list>
+        <ion-list>
+            <label ng-repeat="(i,v) in data.address" class="item item-text-wrap item-icon-right item-checkbox" ng-click="selectAddress(i)">
+                <div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle">
+                    <input type="checkbox" ng-model="data.address[i].value">
+                    <i class="checkbox-icon"></i>
+                </div>
+                <div class="item-content">
+                    <p class="ng-binding"><b>ชื่อ-นามสกุลผู้รับ</b> : fsfmsklf</p>
+                    <p class="ng-binding"><b>ที่อยู่จัดส่ง</b> : 222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130</p>
+                    <p class="ng-binding"><b>เบอร์โทร</b> : 1339</p>
+                    <a ng-click="manageAddress()" class="button button-icon icon ion-ios-gear-outline" ></a>
+                </div>
             </label>
-            <label class="item item-input">
-                <span class="input-label" style="padding-right:10px" >Phone Number*</span>
-                <textarea placeholder=""  > {{" "+loggedin_phone}}</textarea>
-            </label>
-            <label class="item item-input">
-                <span class="input-label" style="padding-right:0px">Address*</span>
-				<textarea placeholder=""  > {{" "+loggedin_address}}</textarea>
-            </label>
-            <label class="item item-input">
-                <span class="input-label" style="padding-right:15px">Pincode*</span>
-                 <textarea placeholder=""  > {{" "+loggedin_pincode}}</textarea>
-            </label>
-        </form>
-        <div class="spacer" style="width: 300px; height: 15px;"></div>
-        <form class="list">
-            <label class="item item-input">
-                <span class="input-label">Coupon</span>
-                <input type="text" placeholder="(Optional)">
-            </label>
-        </form>
-        <a href="#/page8" class="button button-balanced button-outline button-block ">Check Out</a>
+        </ion-list>-->
+
+        <div class="item item-text-wrap item-icon-left item-icon-right" ng-repeat="(i,v) in data.address">
+            <a ng-click="selectAddress(i)" class="button button-icon icon"
+                ng-class="{'ion-ios-circle-outline text-gray': !v.value, 'ion-ios-checkmark text-blue': v.value}" style="opacity: 1;"></a>
+            <p><b>ชื่อ-นามสกุลผู้รับ</b> : {{ v.u_name }}</p>
+            <p><b>ที่อยู่จัดส่ง</b> : {{ v.u_address }}</p>
+            <p><b>เบอร์โทร</b> : {{ v.u_phone }}</p>
+            <a ng-if="v.id!=0" ng-click="manageAddress(v)" class="button button-icon icon ion-ios-gear-outline" style="opacity: 1;"></a>
+        </div>
+        <a ng-click="openModaldAddress()" style="margin-top: 8px;" class="button button-energized button-outline button-block ">เพิ่มที่อยู่ใหม่</a>
+        <h3>รูปแบบชำระเงิน</h3>
+        <div class="item item-text-wrap item-icon-left">
+            <i class="button button-icon icon ion-ios-checkmark text-blue"></i>
+            <p>จ่ายเงินปลายทาง</p>
+        </div>
+        <a ng-click="payBill()" style="margin-top: 8px;" class="button button-energized button-block" ng-disabled="disablePayBill()">ชำระสินค้า ({{ cart.price|number:2  }} บาท)</a>
     </ion-content>
 </ion-view>

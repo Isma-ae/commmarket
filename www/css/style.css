@@ -15,10 +15,12 @@ body, *, .button {
 
 }
 
-.bar.bar-orange{
+.bar.bar-orange {
     border-color: #ff8c00;
     background-color: #ff8c00;
     background-image: linear-gradient(0deg, #ff8c00, #ff8c00 50%, transparent 50%);
+}
+.bar.bar-orange .title {
     color: #fff;
 }
 
@@ -27,7 +29,7 @@ body, *, .button {
 }
 
 ion-tabs.tabs-color-active-orange .tab-item.tab-item-active, ion-tabs.tabs-color-active-orange .tab-item.active, ion-tabs.tabs-color-active-orange .tab-item.activated {
-    color: #ff8c00;
+    color: #ff8c00 !important;
 }
 .my-content{
     background-color: #ddd;
@@ -82,7 +84,7 @@ ion-tabs.tabs-color-active-orange .tab-item.tab-item-active, ion-tabs.tabs-color
     width: 100%;
     height: 100px;
 }
-.button-orange{
+.button-orange {
     background-color: #ff8c00;
     color: #fff;
     margin-top: 10px !important;
@@ -91,3 +93,12 @@ ion-tabs.tabs-color-active-orange .tab-item.tab-item-active, ion-tabs.tabs-color
 .my-label{
     background: #fff !important;
 }
+.text-white { color: #ffffff !important; }
+.text-gray { color: #d3d3d3; }
+.text-blue { color: #387ef5; }
+.text-green { color: #00bb00; }
+.button.btn-custom{ border-color: #b2b2b2;border-radius: 0px !important; }
+.col.a-custom.activated{ background-color: #e5e5e5;margin:0px;}
+.icon-custom{ color: #ff8c00; }
+.button.button-orange{background-color: #ff8c00}
+

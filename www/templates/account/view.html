@@ -1,5 +1,5 @@
 <ion-view title="ฉัน">
-	<ion-content padding="'true'" class="has-header my-content">
+	<ion-content class="has-header my-content">
         <form class="list" ng-if="!auth.user">
             <ion-list>
                 <label class="item item-input">
@@ -16,9 +16,60 @@
             <a href="#/tab/signup" class="button button-positive button-clear button-block ">Or create an account</a>
         </form>
         <div ng-if="auth.user">
-            <h2>My profile</h2>
-            {{ auth.user }}
-            <button  class="button button-stable button-block " ng-click="logout()" >Log out</button>
+            <div class="row" style="height:150px; background-image:url('img/bg-profile.jpg');background-size: 380px 150px;">
+                <div class="col col-40 text-center">
+                    <img ng-src="img/me.jpg" style="width:60px;height:60px;border-radius:50%;margin-top:40px;">
+                </div>
+                <div class="col col-60">
+                    <p style="margin-top:40px;background-color:rgba(0.5, 0.5, 0.5, 1)"><b>{{ auth.user.u_name }}</b></p>
+                    <button class="button button-energized button-small" ng-click="logout()">Log out</button>
+                </div>
+            </div>
+            <div class="row text-center" style="background-color:#fff;padding:0px;">
+
+                <a class="col col-33 a-custom">
+                    <h1 class="icon ion-document-text icon-custom"></h1>
+                    <p>ที่ต้องชำระ</p>
+                </a>
+                <a class="col col-33 a-custom">
+                    <h1 class="icon ion-android-bus icon-custom"></h1>
+                    <p>ที่ต้องจัดส่ง</p>
+                </a>
+                <a class="col col-33 a-custom">
+                    <h1 class="icon ion-archive icon-custom"></h1>
+                    <p>ที่ต้องได้รับ</p>
+                </a>
+            </div>
+            <div class="list">
+                <a class="item item-icon-left" href="#">
+                    <i class="icon ion-ios-heart icon-custom"></i>
+                    สิ่งที่ฉันถูกใจ
+                    <span class="item-note">
+                        1 รายการ >
+                    </span>
+                </a>
+                <a class="item item-icon-left" href="#">
+                    <i class="icon ion-ios-clock icon-custom"></i>
+                    ที่ดูล่าสุด
+                    <span class="item-note">
+                        ที่เคยดูล่าสุด >
+                    </span>
+                </a>
+                <a class="item item-icon-left" href="#">
+                    <i class="icon ion-ios-person icon-custom"></i>
+                    บัญชีของฉัน
+                    <span class="item-note">
+                        ดูบัญชีของฉัน >
+                    </span>
+                </a>
+                <a class="item item-icon-left" href="#">
+                    <i class="icon ion-ios-help icon-custom"></i>
+                    ช่วยเหลือ
+                    <span class="item-note">
+                        ดูการช่วยเหลือ >
+                    </span>
+                </a>
+            </div>
         </div>
     </ion-content>
 </ion-view>

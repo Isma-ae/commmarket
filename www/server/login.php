@@ -10,7 +10,7 @@
 
 	$return = array();
 
-	$sql = "SELECT * FROM users WHERE u_username = '$email' AND u_password = '$password'";
+	$sql = "SELECT * FROM users WHERE u_username = '$email' AND u_password = '$password' AND `status`='Y' ";
 	$obj = $DATABASE->QueryObj( $sql );
 	if(sizeof($obj) == 1) {
 		$u_id = $obj[0]["u_id"];

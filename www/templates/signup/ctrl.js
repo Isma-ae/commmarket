@@ -1,9 +1,10 @@
 angular.module('app.controllers')
     .controller('signupCtrl', function($rootScope,$scope,$http,$state,$ionicHistory,$ksFactory) {
         $scope.data = {};
+        $scope.data.saler = "1";
         $scope.signup=function(){
             var data = $scope.data;
-            $ksFactory.http($rootScope.URL+'signup.php', {
+            $ksFactory.http($rootScope.URL+'signup_add.php', {
                 sale_cat: data.saler,
                 comm: data.comm,
                 name: data.name, 
@@ -18,6 +19,8 @@ angular.module('app.controllers')
                 } else {
                     $ksFactory.alert("Error เนื่องจาก "+res);
                 }
-            });
+            }, function (res) { 
+                
+            }, true);
         }
     })

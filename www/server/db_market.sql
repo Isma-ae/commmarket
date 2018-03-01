@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : www
+Source Server         : localhost
 Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : db_market
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-02-26 20:45:30
+Date: 2018-03-02 01:32:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -44,6 +44,7 @@ INSERT INTO `products` VALUES ('8', 'ผ้าโสร่ง', 'Product Descrip
 INSERT INTO `products` VALUES ('9', 'กกก', 'ดดเเ', '1', '20', '5550', '1');
 INSERT INTO `products` VALUES ('12', 'sss', 'ddd', '1', '30', '10', '1');
 INSERT INTO `products` VALUES ('13', 'กดดด', 'เเ', '1', '30', '20', '1');
+INSERT INTO `products` VALUES ('14', 'ggg', 'Gg', '1', '50', '20', '1');
 
 -- ----------------------------
 -- Table structure for `products_image`
@@ -77,6 +78,8 @@ INSERT INTO `products_image` VALUES ('15', '1519193227.jpg', '10');
 INSERT INTO `products_image` VALUES ('16', '1519401393.jpg', '11');
 INSERT INTO `products_image` VALUES ('17', '1519402342.jpg', '12');
 INSERT INTO `products_image` VALUES ('18', '1519402582.jpg', '13');
+INSERT INTO `products_image` VALUES ('19', '1519745240.jpg', '14');
+INSERT INTO `products_image` VALUES ('20', '1519745270.jpg', '14');
 
 -- ----------------------------
 -- Table structure for `products_image_temp`
@@ -112,6 +115,25 @@ CREATE TABLE `tb_admin` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `tb_bank`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_bank`;
+CREATE TABLE `tb_bank` (
+  `bank_id` int(11) NOT NULL,
+  `bank_name` varchar(200) NOT NULL,
+  `bank_code` varchar(200) NOT NULL,
+  PRIMARY KEY (`bank_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_bank
+-- ----------------------------
+INSERT INTO `tb_bank` VALUES ('1', 'ธนาคารกรุงศรีอยุธยา (KrungsriOnline)', 'internet_banking_bay');
+INSERT INTO `tb_bank` VALUES ('2', 'ธนาคารกรุงเทพ (Bualuang iBanking)', 'internet_banking_bbl');
+INSERT INTO `tb_bank` VALUES ('3', 'ธนาคารกรุงไทย (KTB Netbank)', 'internet_banking_ktb');
+INSERT INTO `tb_bank` VALUES ('4', 'ธนาคารไทยพาณิชย์ (SCBEasy)', 'internet_banking_scb');
+
+-- ----------------------------
 -- Table structure for `tb_cart`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_cart`;
@@ -130,7 +152,7 @@ CREATE TABLE `tb_cart` (
 -- ----------------------------
 -- Records of tb_cart
 -- ----------------------------
-INSERT INTO `tb_cart` VALUES ('1', '0', '6', '1', '300', '192.168.137.198', 'a9f5b4971fc7842f', '2018-02-25 19:09:46');
+INSERT INTO `tb_cart` VALUES ('1', '1', '1', '1', '183', '192.168.1.46', 'be1bea965d8427a8', '2018-03-01 22:18:11');
 
 -- ----------------------------
 -- Table structure for `tb_categories`
@@ -151,22 +173,52 @@ INSERT INTO `tb_categories` VALUES ('2', 'อาหาร', '2.png');
 INSERT INTO `tb_categories` VALUES ('3', 'อุุปกรณ์ต่างๆ', '3.png');
 
 -- ----------------------------
+-- Table structure for `tb_charges_history`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_charges_history`;
+CREATE TABLE `tb_charges_history` (
+  `order_doc` varchar(10) NOT NULL,
+  `charge_id` varchar(200) NOT NULL,
+  `ordered` int(11) NOT NULL,
+  PRIMARY KEY (`order_doc`,`charge_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_charges_history
+-- ----------------------------
+INSERT INTO `tb_charges_history` VALUES ('ODR0000002', 'chrg_test_5b4hu8hj7s51rev8zhx', '1');
+INSERT INTO `tb_charges_history` VALUES ('ODR0000003', 'chrg_test_5b4hv9r6uaxgpvt0gnb', '2');
+INSERT INTO `tb_charges_history` VALUES ('ODR0000004', 'chrg_test_5b4hvwekj9dh1bdjhhc', '3');
+INSERT INTO `tb_charges_history` VALUES ('ODR0000005', 'chrg_test_5b4hwv391szn7x2b5ou', '4');
+INSERT INTO `tb_charges_history` VALUES ('ODR0000006', 'chrg_test_5b4hx46cmiy64u5ey21', '5');
+INSERT INTO `tb_charges_history` VALUES ('ODR0000007', 'chrg_test_5b4i3e7lq37tod0d0a4', '6');
+INSERT INTO `tb_charges_history` VALUES ('ODR0000008', 'chrg_test_5b4nk6eatjb9tcbavrq', '7');
+
+-- ----------------------------
 -- Table structure for `tb_notification`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_notification`;
 CREATE TABLE `tb_notification` (
-  `notification_id` int(11) NOT NULL,
-  `notification_name` varchar(200) NOT NULL,
+  `noti_id` int(11) NOT NULL,
+  `noti_title` varchar(200) NOT NULL,
+  `noti_message` varchar(200) NOT NULL,
   `u_id` int(11) NOT NULL,
   `readed` varchar(1) NOT NULL,
-  PRIMARY KEY (`notification_id`)
+  PRIMARY KEY (`noti_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_notification
 -- ----------------------------
-INSERT INTO `tb_notification` VALUES ('1', 'aaaa', '1', 'Y');
-INSERT INTO `tb_notification` VALUES ('2', 'bbb', '1', 'N');
+INSERT INTO `tb_notification` VALUES ('1', 'Commmarket', 'มีลูกค้าได้ทำการสั่งซื้อสินค้าของคุณ สามารถตรวจสอบได้ค่ะ', '1', 'N');
+INSERT INTO `tb_notification` VALUES ('2', 'Commmarket', 'มีลูกค้าได้ทำการสั่งซื้อสินค้าของคุณ สามารถตรวจสอบได้ค่ะ', '2', 'N');
+INSERT INTO `tb_notification` VALUES ('3', 'Commmarket', 'มีลูกค้าได้ทำการสั่งซื้อสินค้าของคุณ สามารถตรวจสอบได้ค่ะ', '1', 'N');
+INSERT INTO `tb_notification` VALUES ('4', 'Commmarket', 'มีลูกค้าได้ทำการสั่งซื้อสินค้าของคุณ สามารถตรวจสอบได้ค่ะ', '2', 'N');
+INSERT INTO `tb_notification` VALUES ('5', 'Commmarket', 'มีลูกค้าได้ทำการสั่งซื้อสินค้าของคุณ สามารถตรวจสอบได้ค่ะ', '1', 'N');
+INSERT INTO `tb_notification` VALUES ('6', 'Commmarket', 'มีลูกค้าได้ทำการสั่งซื้อสินค้าของคุณ สามารถตรวจสอบได้ค่ะ', '1', 'N');
+INSERT INTO `tb_notification` VALUES ('7', 'Commmarket', 'มีลูกค้าได้ทำการสั่งซื้อสินค้าของคุณ สามารถตรวจสอบได้ค่ะ', '2', 'N');
+INSERT INTO `tb_notification` VALUES ('8', 'Commmarket', 'มีลูกค้าได้ทำการสั่งซื้อสินค้าของคุณ สามารถตรวจสอบได้ค่ะ', '1', 'N');
+INSERT INTO `tb_notification` VALUES ('9', 'Commmarket', 'มีลูกค้าได้ทำการสั่งซื้อสินค้าของคุณ สามารถตรวจสอบได้ค่ะ', '1', 'N');
 
 -- ----------------------------
 -- Table structure for `tb_order`
@@ -175,6 +227,7 @@ DROP TABLE IF EXISTS `tb_order`;
 CREATE TABLE `tb_order` (
   `order_id` int(11) NOT NULL,
   `order_doc` varchar(10) NOT NULL,
+  `u_id_saler` int(11) NOT NULL,
   `u_id` int(11) NOT NULL,
   `sum_price` varchar(255) NOT NULL,
   `address_name` varchar(255) NOT NULL,
@@ -189,18 +242,17 @@ CREATE TABLE `tb_order` (
 -- ----------------------------
 -- Records of tb_order
 -- ----------------------------
-INSERT INTO `tb_order` VALUES ('1', 'ODR0000001', '1', '549', 'fsfmsklf', '1339', '222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130', '0', '2018-02-24', 'Y');
-INSERT INTO `tb_order` VALUES ('2', 'ODR0000001', '1', '501', 'fsfmsklf', '1339', '222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130', '0', '2018-02-24', 'Y');
-INSERT INTO `tb_order` VALUES ('3', 'ODR0000002', '1', '655', 'sss', '2222', '33333', '0', '2018-02-24', 'Y');
-INSERT INTO `tb_order` VALUES ('4', 'ODR0000002', '1', '334', 'sss', '2222', '33333', '0', '2018-02-24', 'Y');
-INSERT INTO `tb_order` VALUES ('5', 'ODR0000003', '1', '123', 'fsfmsklf', '1339', '222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130', '0', '2018-02-24', 'Y');
-INSERT INTO `tb_order` VALUES ('6', 'ODR0000004', '1', '183', 'fsfmsklf', '1339', '222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130', '0', '2018-02-24', 'Y');
-INSERT INTO `tb_order` VALUES ('7', 'ODR0000005', '1', '183', 'hhh', 'ttt', 'Ttt', '0', '2018-02-24', 'Y');
-INSERT INTO `tb_order` VALUES ('8', 'ODR0000006', '1', '183', 'fsfmsklf', '1339', '222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130', '0', '2018-02-24', 'Y');
-INSERT INTO `tb_order` VALUES ('9', 'ODR0000007', '1', '721', 'sss', '2222', '33333', '0', '2018-02-26', 'Y');
-INSERT INTO `tb_order` VALUES ('10', 'ODR0000008', '1', '183', 'อิสมาแอ ดือราแม', '1339', '222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130', '0', '2018-02-26', 'Y');
-INSERT INTO `tb_order` VALUES ('11', 'ODR0000009', '1', '472', 'aaa11', 'ss22', 'dd33', '0', '2018-02-26', 'Y');
-INSERT INTO `tb_order` VALUES ('12', 'ODR0000009', '1', '167', 'aaa11', 'ss22', 'dd33', '0', '2018-02-26', 'Y');
+INSERT INTO `tb_order` VALUES ('1', 'ODR0000001', '1', '1', '183', 'อิสมาแอ ดือราแม', '1339', '222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130', '0', '2018-03-01', 'Y');
+INSERT INTO `tb_order` VALUES ('2', 'ODR0000001', '2', '1', '167', 'อิสมาแอ ดือราแม', '1339', '222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130', '0', '2018-03-01', 'Y');
+INSERT INTO `tb_order` VALUES ('3', 'ODR0000002', '1', '1', '183', 'อิสมาแอ ดือราแม', '1339', '222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130', '0', '2018-03-01', 'Y');
+INSERT INTO `tb_order` VALUES ('4', 'ODR0000002', '2', '1', '167', 'อิสมาแอ ดือราแม', '1339', '222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130', '0', '2018-03-01', 'Y');
+INSERT INTO `tb_order` VALUES ('5', 'ODR0000003', '1', '1', '172', 'aaa11', 'ss22', 'dd33', '0', '2018-03-01', 'N');
+INSERT INTO `tb_order` VALUES ('6', 'ODR0000004', '1', '1', '355', 'sss', '2222', '33333', '0', '2018-03-01', 'Y');
+INSERT INTO `tb_order` VALUES ('7', 'ODR0000005', '1', '1', '172', 'อิสมาแอ ดือราแม', '1339', '222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130', '0', '2018-03-01', 'Y');
+INSERT INTO `tb_order` VALUES ('8', 'ODR0000005', '2', '1', '167', 'อิสมาแอ ดือราแม', '1339', '222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130', '0', '2018-03-01', 'Y');
+INSERT INTO `tb_order` VALUES ('9', 'ODR0000006', '1', '1', '183', 'อิสมาแอ ดือราแม', '1339', '222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130', '0', '2018-03-01', 'N');
+INSERT INTO `tb_order` VALUES ('10', 'ODR0000007', '1', '1', '183', 'อิสมาแอ ดือราแม', '1339', '222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130', '0', '2018-03-01', 'Y');
+INSERT INTO `tb_order` VALUES ('11', 'ODR0000008', '1', '1', '366', 'อิสมาแอ ดือราแม', '1339', '222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130', '0', '2018-03-01', 'Y');
 
 -- ----------------------------
 -- Table structure for `tb_order_detail`
@@ -217,23 +269,18 @@ CREATE TABLE `tb_order_detail` (
 -- ----------------------------
 -- Records of tb_order_detail
 -- ----------------------------
-INSERT INTO `tb_order_detail` VALUES ('1', '1', '3', '549');
-INSERT INTO `tb_order_detail` VALUES ('2', '3', '3', '501');
+INSERT INTO `tb_order_detail` VALUES ('1', '1', '1', '183');
+INSERT INTO `tb_order_detail` VALUES ('2', '3', '1', '167');
 INSERT INTO `tb_order_detail` VALUES ('3', '1', '1', '183');
-INSERT INTO `tb_order_detail` VALUES ('3', '2', '1', '172');
-INSERT INTO `tb_order_detail` VALUES ('3', '4', '1', '177');
-INSERT INTO `tb_order_detail` VALUES ('3', '5', '1', '123');
-INSERT INTO `tb_order_detail` VALUES ('4', '3', '2', '334');
-INSERT INTO `tb_order_detail` VALUES ('5', '5', '1', '123');
+INSERT INTO `tb_order_detail` VALUES ('4', '3', '1', '167');
+INSERT INTO `tb_order_detail` VALUES ('5', '2', '1', '172');
 INSERT INTO `tb_order_detail` VALUES ('6', '1', '1', '183');
-INSERT INTO `tb_order_detail` VALUES ('7', '1', '1', '183');
-INSERT INTO `tb_order_detail` VALUES ('8', '1', '1', '183');
-INSERT INTO `tb_order_detail` VALUES ('9', '1', '3', '549');
-INSERT INTO `tb_order_detail` VALUES ('9', '2', '1', '172');
+INSERT INTO `tb_order_detail` VALUES ('6', '2', '1', '172');
+INSERT INTO `tb_order_detail` VALUES ('7', '2', '1', '172');
+INSERT INTO `tb_order_detail` VALUES ('8', '3', '1', '167');
+INSERT INTO `tb_order_detail` VALUES ('9', '1', '1', '183');
 INSERT INTO `tb_order_detail` VALUES ('10', '1', '1', '183');
-INSERT INTO `tb_order_detail` VALUES ('11', '2', '1', '172');
-INSERT INTO `tb_order_detail` VALUES ('11', '6', '1', '300');
-INSERT INTO `tb_order_detail` VALUES ('12', '3', '1', '167');
+INSERT INTO `tb_order_detail` VALUES ('11', '1', '2', '366');
 
 -- ----------------------------
 -- Table structure for `tb_pay`
@@ -268,7 +315,8 @@ CREATE TABLE `tb_pay_type` (
 -- Records of tb_pay_type
 -- ----------------------------
 INSERT INTO `tb_pay_type` VALUES ('1', 'ชำระเงินปลายทาง');
-INSERT INTO `tb_pay_type` VALUES ('2', 'ชำระผ่านธนาคาร');
+INSERT INTO `tb_pay_type` VALUES ('2', 'ชำระผ่านบัตรเครดิต');
+INSERT INTO `tb_pay_type` VALUES ('3', 'อินเตอร์เน็ตแบงค์กิ้ง');
 
 -- ----------------------------
 -- Table structure for `tb_ship`
@@ -301,9 +349,7 @@ CREATE TABLE `tb_user_device` (
 -- ----------------------------
 -- Records of tb_user_device
 -- ----------------------------
-INSERT INTO `tb_user_device` VALUES ('1', '1', '143c5cb5-8182-4be6-841a-2515b592faed', '2018-02-24 21:28:29');
-INSERT INTO `tb_user_device` VALUES ('2', '1', '6f000f5d-14f2-47c3-81f0-01129fd96fe3', '2018-02-24 21:59:07');
-INSERT INTO `tb_user_device` VALUES ('3', '1', '64b0416a-ed85-49b4-9732-7bbb48811313', '2018-02-25 19:07:48');
+INSERT INTO `tb_user_device` VALUES ('1', '1', '7f865ea0-336b-4891-bcf7-ae0ebb6bc877', '2018-03-01 23:32:32');
 
 -- ----------------------------
 -- Table structure for `users`
@@ -319,6 +365,8 @@ CREATE TABLE `users` (
   `u_address` varchar(300) NOT NULL,
   `u_market` varchar(300) NOT NULL,
   `sale_cat` int(11) NOT NULL,
+  `status` varchar(1) NOT NULL,
+  `confirm` varchar(200) NOT NULL,
   PRIMARY KEY (`u_id`),
   UNIQUE KEY `uk_u_username` (`u_username`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
@@ -326,8 +374,8 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'อิสมาแอ ดือราแม', '', 'eee@gmail.com', '138193', '1339', '222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130', 'dad', '0');
-INSERT INTO `users` VALUES ('2', 'ccc', '', 'aaa@g.com', 'aaa', 'eee', 'ssss', '', '0');
+INSERT INTO `users` VALUES ('1', 'อิสมาแอ ดือราแม', '', 'eee@gmail.com', '138193', '1339', '222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130', 'dad', '0', 'Y', 'ssssssssssssssssssssssss');
+INSERT INTO `users` VALUES ('2', 'สสส', 'รูสะมิแล', 'r_kee19384@hotmail.com', '123456', '012345', '123/1', '', '1', 'Y', '213de5522f7a52b191e3df22b3f77a38');
 
 -- ----------------------------
 -- Table structure for `users_address`

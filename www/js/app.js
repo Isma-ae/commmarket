@@ -57,5 +57,6 @@ angular.module('app', ['ionic', 'ngCordova','app.controllers', 'app.routes', 'ap
             $notification.get($rootScope.USER);
             $location.path("/tab/home");
             //$location.path("/blank/paybillSuccess/ORD0000001");
+            //$location.path("/tab/signup");
         });
     })

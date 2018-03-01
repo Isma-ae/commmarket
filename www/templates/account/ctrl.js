@@ -26,6 +26,18 @@ angular.module('app.controllers')
                     $rootScope.USER = res.user;
                     $cart.update($rootScope.USER);
                     $notification.update($rootScope.USER);
+                    if ($rootScope.DEVICE.uuid) {
+                        window.plugins.OneSignal.getIds(function (ids) {
+                            $ksFactory.http($rootScope.URL + 'push_add.php', {
+                                u_id: $rootScope.USER.u_id,
+                                player_id: ids.userId
+                            }, function (res) {
+
+                            }, function (res) {
+
+                            }, false);
+                        });
+                    }
                 } else if( res.status=='N' ) {
                     $ksFactory.alert("Error เนื่องจาก "+res.msg);
                 } else {

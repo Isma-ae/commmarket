@@ -8,7 +8,7 @@
                     </div>
                     <select ng-model="data.saler">
                         <option value="1">ทั่วไป</option>
-                        <option selected value="2">ชุมชน</option>
+                        <option value="2">ชุมชน</option>
                     </select>
                 </label>
                 <label class="item item-input">
@@ -16,34 +16,33 @@
                     <input type="text" placeholder="" ng-model="data.comm">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">ชื่อ-สกุล</span>
+                    <span class="input-label">ชื่อ-สกุล *</span>
                     <input type="text" placeholder="" ng-model="data.name">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">อีเมลล์</span>
+                    <span class="input-label">อีเมลล์ *</span>
                     <input type="email" placeholder="" ng-model="data.username">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">รหัสผ่าน</span>
+                    <span class="input-label">รหัสผ่าน *</span>
                     <input type="password" placeholder="" ng-model="data.password">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">ยืนยันรหัสผ่าน</span>
+                    <span class="input-label">ยืนยันรหัสผ่าน *</span>
                     <input type="password" placeholder="" ng-model="data.repassword">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">เบอร์โทรศัพท์</span>
-                    <input type="number" placeholder="" ng-model="data.phone">
+                    <span class="input-label">เบอร์โทรศัพท์ *</span>
+                    <input type="tel" placeholder="" ng-model="data.phone">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">ที่อยู่</span>
-                    <textarea type="text" placeholder="" ng-model="data.address"></textarea>
+                    <span class="input-label">ที่อยู่ *</span>
+                    <input type="text" placeholder="" ng-model="data.address">
                 </label>
                 <label class="item item-input">
                     <span class="input-label">ชื่อร้าน</span>
                     <input type="text" placeholder="" ng-model="data.market">
                 </label>
-                
             </ion-list>
             <button ng-click="signup()" class="button button-orange button-block ">Sign up</button>
         </form>

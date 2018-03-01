@@ -1,11 +1,8 @@
 angular.module('app.controllers', [])
 	.controller('appCtrl', function($rootScope, $scope, $cart, $notification, $location, $state, $ksFactory) {
-        $scope.cart = $cart.cart;
-
-        $notification.get($rootScope.USER, function(data) {
-            $scope.notification = data;
-            $scope.qty = data.length;
-        });
+		$scope.cart = $cart.cart;
+		$scope.notification = $notification.noti;
+		$scope.sale = $notification.sale;
 	})
 
 

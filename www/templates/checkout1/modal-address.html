@@ -20,8 +20,12 @@
                 <span class="input-label">ที่อยู่จัดส่ง *</span>
                 <textarea placeholder="ที่อยู่จัดส่ง" ng-model="data.u_address" rows="3"></textarea>
             </label>
-            <a ng-if="modal_address_id==''" ng-click="addAddress()" style="margin-top: 8px;" class="button button-energized button-outline button-block ">เพิ่ม</a>
-            <a ng-if="modal_address_id!=''" ng-click="editAddress()" style="margin-top: 8px;" class="button button-energized button-outline button-block ">แก้ไข</a>
+            <a ng-if="modal_address_id==''" 
+                ng-disabled="!data.u_name || !data.u_phone || !data.u_address"
+                ng-click="addAddress()" style="margin-top: 8px;" class="button button-energized button-outline button-block ">เพิ่ม</a>
+            <a ng-if="modal_address_id!=''" 
+                ng-disabled="!data.u_name || !data.u_phone || !data.u_address"
+                ng-click="editAddress()" style="margin-top: 8px;" class="button button-energized button-outline button-block ">แก้ไข</a>
         </form>
     </ion-content>
 </ion-modal-view>

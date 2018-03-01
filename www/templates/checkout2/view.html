@@ -1,0 +1,17 @@
+<ion-view title="Check Out">
+    <ion-content padding="'true'" class="has-header">
+        <h3>รูปแบบชำระเงิน</h3>
+        <div class="item item-text-wrap item-icon-left" ng-repeat="(i,v) in data.pay_type">
+            <a ng-click="selectPayType(i)" class="button button-icon icon button-clear" ng-class="{'ion-ios-circle-outline button-stable': !v.value, 'ion-ios-checkmark button-positive': v.value}"
+                style="opacity: 1; max-height: initial;"></a>
+            <p>{{ v.pay_type_name }}</p>
+        </div>
+        <br>
+        <div ng-show="getPayType().pay_type_id=='3'" class="item item-text-wrap item-icon-left" ng-repeat="(i,v) in data.bank">
+            <a ng-click="selectBank(i)" class="button button-icon icon button-clear" ng-class="{'ion-ios-circle-outline button-stable': !v.value, 'ion-ios-checkmark button-positive': v.value}"
+                style="opacity: 1; max-height: initial;"></a>
+            <p>{{ v.bank_name }}</p>
+        </div>
+        <a ng-click="checkout()" style="margin-top: 8px;" class="button button-energized button-block" ng-disabled="getPayType()==null || (getBank()==null && getPayType().pay_type_id=='3')">ชำระสินค้า ({{ cart.price|number:2  }} บาท)</a>
+    </ion-content>
+</ion-view>

@@ -102,3 +102,9 @@ ion-tabs.tabs-color-active-orange .tab-item.tab-item-active, ion-tabs.tabs-color
 .icon-custom{ color: #ff8c00; }
 .button.button-orange{background-color: #ff8c00}
 
+.button-del-image-temp {
+    position: absolute;
+    top: 0;
+    color: #fff !important;
+    right: 0px;
+}

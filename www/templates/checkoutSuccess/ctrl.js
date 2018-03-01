@@ -1,10 +1,10 @@
 angular.module('app.controllers')
-	.controller('paybillSuccessCtrl', function ($rootScope, $scope, $ksFactory, $state, $ionicModal, $ionicActionSheet, $cart, $stateParams) {
+    .controller('checkoutSuccessCtrl', function ($rootScope, $scope, $ksFactory, $state, $ionicModal, $ionicActionSheet, $cart, $notification, $stateParams) {
 
         $scope.data = {};
         $scope.getOrder = function() {
             var order_doc = $stateParams.order_doc;
-            $ksFactory.http($rootScope.URL+'order_get.php', { order_doc: order_doc }, function(res) {
+            $ksFactory.http($rootScope.URL +'checkout_success.php', { order_doc: order_doc }, function(res) {
                 if( res.data ) {
                     $scope.data.order = res.data;
                 } else {
@@ -21,7 +21,8 @@ angular.module('app.controllers')
 				$state.go('tab.account');
 				return;
             }
-            $cart.update();
+            $cart.update($rootScope.USER);
+            $notification.update($rootScope.USER);
             $scope.getOrder();
 		});
     })

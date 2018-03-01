@@ -7,7 +7,8 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('app', ['ionic', 'ngCordova','app.controllers', 'app.routes', 'app.services', 'app.directives', 'ksLibrary'])
     .run(function ($ionicPlatform, $rootScope, $cordovaDevice, $ksFactory, $cart, $notification, $location) {
-        $rootScope.URL = "http://desktop-kmmts8l/server/";
+        $rootScope.URL = "http://desktop-7ir60kp/server/";
+        //$rootScope.URL = "http://172.20.10.11/server/";
         $rootScope.MESSAGE = {
             ERROR1 : "ติดต่อแม่ข่ายไม่ได้",
             NOPERMIT : "กรุณาเข้าสู่ระบบก่อนใช้งาน",
@@ -25,34 +26,35 @@ angular.module('app', ['ionic', 'ngCordova','app.controllers', 'app.routes', 'ap
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
-            /*window.plugins.OneSignal
-                .startInit("795faf89-a2b3-4ec7-ace0-1853e0ee0fe1")
-                .inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.None)
-                .handleNotificationReceived(function(jsonData) {
-                    //alert('handleNotificationReceived: ' + JSON.stringify(jsonData));
-                })
-                .handleNotificationOpened(function(jsonData) {
-                    //alert('handleNotificationOpened: ' + JSON.stringify(jsonData));
-                })
-                .endInit();
+            $rootScope.DEVICE = ionic.Platform.device();
+            if ($rootScope.DEVICE.uuid) {
+                window.plugins.OneSignal
+                    .startInit("795faf89-a2b3-4ec7-ace0-1853e0ee0fe1")
+                    .inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.None)
+                    .handleNotificationReceived(function (jsonData) {
+                        //alert('handleNotificationReceived: ' + JSON.stringify(jsonData));
+                    })
+                    .handleNotificationOpened(function (jsonData) {
+                        //alert('handleNotificationOpened: ' + JSON.stringify(jsonData));
+                    })
+                    .endInit();
                 window.plugins.OneSignal.registerForPushNotifications();
-                window.plugins.OneSignal.getIds(function(ids) {
-                    $ksFactory.http($rootScope.URL+'push_add.php', {
+                window.plugins.OneSignal.getIds(function (ids) {
+                    $ksFactory.http($rootScope.URL + 'push_add.php', {
                         u_id: $rootScope.USER.u_id,
                         player_id: ids.userId
-                    }, function(res) {
+                    }, function (res) {
 
-                    }, function(res) {
+                    }, function (res) {
 
                     }, false);
                 });
-            */
+            }
 
 
-
-            $rootScope.DEVICE = ionic.Platform.device();
+            
             $cart.get($rootScope.USER);
-
+            $notification.get($rootScope.USER);
             $location.path("/tab/home");
             //$location.path("/blank/paybillSuccess/ORD0000001");
         });

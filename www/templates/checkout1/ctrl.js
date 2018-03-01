@@ -1,30 +1,7 @@
 angular.module('app.controllers')
-	.controller('checkOutCtrl', function ($rootScope, $scope, $ksFactory, $state, $ionicModal, $ionicActionSheet, $cart) {
+	.controller('checkout1Ctrl', function ($rootScope, $scope, $ksFactory, $state, $ionicModal, $ionicActionSheet, $cart) {
         $scope.cart = $cart.cart;
 		$scope.data = {};
-		/*$scope.data.address = [
-			{
-				id: 1,
-				name: 'อิสมาแอ แมรอสะนิง',
-                address: "222/1 ม.3 ต.ตะลิงชัน อ.บันนังสตา จ.ยะลา 95130",
-                phone: "0897656785",
-				value: true
-			},
-			{
-				id: 2,
-				name: 'อิสมาแอ แมรอสะนิง',
-				address: "This is a basic Card which contains an item that has wrapping text.",
-                phone: "0897656785",
-				value: false
-			},
-			{
-				id: 3,
-				name: 'อิสมาแอ แมรอสะนิง',
-				address: "This is a basic Card which contains an item that has wrapping text.",
-                phone: "0897656785",
-				value: false
-			},
-        ];*/
         $scope.getAddress = function() {
             $ksFactory.http($rootScope.URL+'user_address_get.php', { u_id: $rootScope.USER.u_id }, function(res) {
                 if( res.data ) {
@@ -46,7 +23,7 @@ angular.module('app.controllers')
 		$scope.openModaldAddress = function () {
 			$scope.modal_address.show();
 		};
-		$ionicModal.fromTemplateUrl('templates/checkOut/modal-address.html', {
+		$ionicModal.fromTemplateUrl('templates/checkout1/modal-address.html', {
 			scope: $scope,
 			animation: 'slide-in-up'
 		}).then(function (modal) {
@@ -134,32 +111,12 @@ angular.module('app.controllers')
                 }
             });
         }
-        $scope.disablePayBill = function() {
-            var user_address = get_user_address();
-            if( user_address==null ) return true;
-            return false;
+        $scope.checkout = function () {
+            var address = $scope.getUserAddress();
+            var address_id = address.id;
+            $state.go('blank.checkout2', { address_id: address_id});
         }
-        $scope.payBill = function() {
-            var user_address = get_user_address();
-            $ksFactory.confirm("คุณแน่ใจต้องการชำระเงินใช่หรือไม่ ?", function(rs) {
-                if( rs ) {
-                    $ksFactory.http($rootScope.URL+'order_add.php', {
-                        id: user_address.id,
-                        u_id: $rootScope.USER.u_id,
-                        uuid: $rootScope.DEVICE.uuid
-                    }, function(res) {
-                        if( res.status=="Y" ) {
-                            $state.go('blank.paybillSuccess', {order_doc: res.order_doc});
-                        } else {
-                            $ksFactory.alert("Error เนื่องจาก "+res);
-                        }
-                    }, function(res) {
-                        $ksFactory.alert("Error เนื่องจาก "+$rootScope.MESSAGE.ERROR1);
-                    }, true);
-                }
-            });
-        }
-        var get_user_address = function() {
+        $scope.getUserAddress = function() {
             if( $scope.data.address ) {
                 for (var i = 0; i < $scope.data.address.length; i++) {
                     if( $scope.data.address[i].value==true ) return $scope.data.address[i];
@@ -173,6 +130,6 @@ angular.module('app.controllers')
 				$state.go('tab.account');
 				return;
             }
-            $scope.getAddress();
+            if ($scope.getUserAddress()==null) $scope.getAddress();
 		});
     })

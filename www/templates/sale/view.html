@@ -5,9 +5,10 @@
 				<img ng-src="{{ URL+'files/products_temp/'+v.image }}" err-src="img/no-image.png">
 			</div>-->
 			<div style="padding:10px 20px 0;">
-				<ion-slide-box auto-play="true" does-continue="true" show-pager="true">
+				<ion-slide-box delegate-handle="my-slide">
 					<ion-slide class="swiper-slide swiper-slide-active" ng-repeat="(x, v) in product.images">
-						<img ng-src="{{ URL+'files/products_temp/'+v.image }}">
+						<img ng-src="{{ URL+'files/products_temp/'+v.image }}" err-src="img/no-image.png">
+						<button class="button button-stable button-clear button-del-image-temp" ng-click="del(v.id)">ลบ</button>
 					</ion-slide>
 				</ion-slide-box>
 			</div>

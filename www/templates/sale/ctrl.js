@@ -1,5 +1,5 @@
 angular.module('app.controllers')
-    .controller('saleCtrl', function ($rootScope, $scope, $ionicActionSheet, $cordovaCamera, $ksFactory, $state, $cordovaFileTransfer, $ionicSlideBoxDelegate) {
+    .controller('saleCtrl', function ($rootScope, $scope, $ionicActionSheet, $cordovaCamera, $ksFactory, $state, $cordovaFileTransfer, $ionicSlideBoxDelegate, $timeout, $notification) {
 
         
 
@@ -26,12 +26,18 @@ angular.module('app.controllers')
             }, true);
         }
         function getProductImageTemp() {
+            $notification.update($rootScope.USER);
             $ksFactory.http($rootScope.URL+'product_image_temp_get.php', {
                 u_id : $rootScope.USER.u_id
             }, function(res) {
-                if( res.data ) {
+                if (res.data) {
                     $scope.product.images = res.data;
-                    $ionicSlideBoxDelegate.update();
+                    $timeout(function () {
+                        $ionicSlideBoxDelegate.$getByHandle('my-slide').update();
+                        if ($scope.product.images.length != 0) {
+                            $ionicSlideBoxDelegate.$getByHandle('my-slide').slide(0);
+                        }
+                    });
                 } else {
                     $ksFactory.alert("Error เนื่องจาก "+res);
                 }
@@ -84,7 +90,7 @@ angular.module('app.controllers')
             };
             $cordovaFileTransfer.upload(server, filePath, options)
                 .then(function(result) {
-                    if( result.response=="Y" ) {
+                    if (result.response == "Y") {
                         getProductImageTemp();
                     } else {
                         getProductImageTemp();
@@ -119,7 +125,7 @@ angular.module('app.controllers')
                 p_stock : $scope.product.p_stock,
                 u_id : $rootScope.USER.u_id
             }, function(res) {
-                if( res=="Y" ) {
+                if (res == "Y") {
                     $ksFactory.alert($rootScope.MESSAGE.SUCCESS);
                 } else {
                     $ksFactory.alert("Error เนื่องจาก "+$rootScope.MESSAGE.NOSUCCESS);
@@ -129,12 +135,25 @@ angular.module('app.controllers')
                 $ksFactory.alert("Error เนื่องจาก "+$rootScope.MESSAGE.ERROR1);
             }, true);
         }
+        $scope.del = function(id) {
+            $ksFactory.http($rootScope.URL + 'product_image_temp_del.php', {
+                id: id
+            }, function (res) {
+                if (res != "Y") { 
+                    $ksFactory.alert("Error เนื่องจาก " + res);
+                }
+                getProductImageTemp();
+            }, function (res) {
+                $ksFactory.alert("Error เนื่องจาก " + $rootScope.MESSAGE.ERROR1);
+            }, true);
+        }
         $scope.$on('$ionicView.enter', function(scopes, states) {
             if( $rootScope.USER==null ) {
                 $ksFactory.alert($rootScope.MESSAGE.NOPERMIT);
                 $state.go('tab.account');
                 return;
             }
+            $notification.update($rootScope.USER);
             getCategory();
             getProductImageTemp();
         });

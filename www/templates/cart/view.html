@@ -13,10 +13,11 @@
 						<strong>  {{ item.c_price|number:2 }}</strong> บาท
 					</p>
 					<div class="button-bar" style="font-size:10px;margin-top:-10px;">
-						<button class="button button-stable button-clear button-block button-small icon ion-plus" ng-click="inc(item.p_id)"></button>
+						<button class="button button-stable button-clear button-block button-small icon ion-plus" ng-click="add(item.p_id)"></button>
 						<button class="button button-stable button-clear button-block button-small">{{item.c_qty|number}}</button>
-						<button class="button button-stable button-clear button-block  icon ion-minus" ng-click="dec(item.p_id)"></button>
+						<button class="button button-stable button-clear button-block  icon ion-minus" ng-click="del(item.p_id)"></button>
 					</div>
+					<button class="button button-stable button-clear" ng-click="delAll(item.p_id)">ลบทั้งหมด</button>
 				</a>
 			</div>
 		</div>

@@ -93,15 +93,20 @@ angular.module('app.routes', [])
                 templateUrl: 'templates/cart/view.html',
                 controller: 'cartCtrl'
             })
-            .state('blank.checkOut', {
-                url: '/checkOut',
-                templateUrl: 'templates/checkOut/view.html',
-                controller: 'checkOutCtrl'
+            .state('blank.checkout1', {
+                url: '/checkout',
+                templateUrl: 'templates/checkout1/view.html',
+                controller: 'checkout1Ctrl'
             })
-            .state('blank.paybillSuccess', {
-                url: '/paybillSuccess/:order_doc',
-                templateUrl: 'templates/paybillSuccess/view.html',
-                controller: 'paybillSuccessCtrl'
+            .state('blank.checkout2', {
+                url: '/checkout/:address_id',
+                templateUrl: 'templates/checkout2/view.html',
+                controller: 'checkout2Ctrl'
+            })
+            .state('blank.checkoutSuccess', {
+                url: '/checkoutSuccess/:order_doc',
+                templateUrl: 'templates/checkoutSuccess/view.html',
+                controller: 'checkoutSuccessCtrl'
             })
 
 

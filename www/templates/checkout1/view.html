@@ -1,0 +1,15 @@
+<ion-view title="Check Out">
+    <ion-content padding="'true'" class="has-header">
+        <h3>ที่อยู่จัดส่ง</h3>
+        <div class="item item-text-wrap item-icon-left item-icon-right" ng-repeat="(i,v) in data.address">
+            <a ng-click="selectAddress(i)" class="button button-icon icon button-clear"
+                ng-class="{'ion-ios-circle-outline button-stable': !v.value, 'ion-ios-checkmark button-positive': v.value}" style="opacity: 1; max-height: initial;"></a>
+            <p><b>ชื่อ-นามสกุลผู้รับ</b> : {{ v.u_name }}</p>
+            <p><b>ที่อยู่จัดส่ง</b> : {{ v.u_address }}</p>
+            <p><b>เบอร์โทร</b> : {{ v.u_phone }}</p>
+            <a ng-if="v.id!=0" ng-click="manageAddress(v)" class="button button-icon icon ion-ios-gear-outline" style="opacity: 1;"></a>
+        </div>
+        <a ng-click="openModaldAddress()" style="margin-top: 8px;" class="button button-energized button-outline button-block ">เพิ่มที่อยู่ใหม่</a>
+        <a ng-click="checkout()" style="margin-top: 8px;" class="button button-energized button-block" ng-disabled="getUserAddress()==null">ชำระสินค้า ({{ cart.price|number:2  }} บาท)</a>
+    </ion-content>
+</ion-view>

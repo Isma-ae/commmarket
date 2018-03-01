@@ -1,10 +1,10 @@
 <ion-view title="แจ้งเตือน">
-	<ion-content class="has-header my-content">
-		แจ้งเตือน
+	<ion-content class="padding has-header my-content">
 		<ion-list>
-			<ion-item ng-repeat="x in notification">{{ x.notification_name }}</ion-item>
+			<ion-item ng-repeat="x in notification.items">
+				<h3>{{ x.noti_title }}</h3>
+				<p>{{ x.noti_message }}</p>
+			</ion-item>
 		</ion-list>
-		<!--<ion-infinite-scroll on-infinite="getProductGuide()" distance="1%">
-        </ion-infinite-scroll>-->
 	</ion-content>
 </ion-view>

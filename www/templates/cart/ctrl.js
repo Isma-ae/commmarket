@@ -1,35 +1,26 @@
 angular.module('app.controllers')
-    .controller('cartCtrl', function($rootScope, $scope,sharedCartService,$ionicPopup,$state,$ionicHistory, $cart, $ksFactory) {
+    .controller('cartCtrl', function($rootScope, $scope,$ionicPopup,$state,$ionicHistory, $cart, $ksFactory) {
         $scope.goBack = function() {
             $ionicHistory.goBack();
         }
         $scope.cart = $cart.cart;
-
-
-        $scope.removeFromCart=function(c_id){
-            /*$scope.cart.drop(c_id);
-            $scope.total_qty=sharedCartService.total_qty;
-            $scope.total_amount=sharedCartService.total_amount;*/
-
+        $scope.delAll = function (p_id) {
+            $ksFactory.confirm($rootScope.MESSAGE.CONFIRM_DEL, function (rs) { 
+                if (rs) { 
+                    $cart.del_all($rootScope.USER, p_id);
+                }
+            });
         };
-
-        $scope.inc=function(p_id) {
+        $scope.add = function(p_id) {
             $cart.add($rootScope.USER, p_id);
         };
-        $scope.dec = function(p_id) {
+        $scope.del = function(p_id) {
             $cart.del($rootScope.USER, p_id);
         };
-
         $scope.checkout=function() {
-            //if($scope.total_amount>0){
-                $state.go('blank.checkOut');
-            //}
-            /*else{
-                var alertPopup = $ionicPopup.alert({
-                    title: 'No item in your Cart',
-                    template: 'Please add Some Items!'
-                });
-            }*/
+            $state.go('blank.checkout1');
         };
-
+        $scope.$on('$ionicView.enter', function (scopes, states) {
+            $cart.update($rootScope.USER);
+        });
     })

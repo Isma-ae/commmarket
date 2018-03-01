@@ -77,75 +77,38 @@ angular.module('app.services', [])
 	}
 	return $objCart;
 })
-
 .factory("$notification", function($rootScope, $ionicPlatform, $ksFactory) {
 	var $objNotification = {};
     $objNotification.noti = {};
     $objNotification.noti.items = [];
-    $objNotification.noti.qty = 0;
+	$objNotification.noti.qty = 0;
+	$objNotification.sale = {};
+	$objNotification.sale.items = [];
     var sum_qty = function() {
 		$objNotification.noti.qty = 0;
 		var len = $objNotification.noti.items.length;
-		for(var i=0;i<len;i++) {
-            $objNotification.noti.qty++;
-			//$objNotification.noti.qty = $objNotification.noti.qty + $objNotification.noti.items[i].c_qty*1;
+		for (var i = 0; i < len; i++) {
+			if ($objNotification.noti.items[i].readed=='N' ) $objNotification.noti.qty++;
 		}
-    }
+	}
+	$objNotification.update = function (user, callback) {
+		$objNotification.get(user, callback);
+	}
 	$objNotification.get = function(user,callback) {
 		$ionicPlatform.ready(function () {
 			var u_id = ( !user ) ? "" : user.u_id;
-			$ksFactory.http($rootScope.URL+"notification_get.php", {
+			$ksFactory.http($rootScope.URL+"noti_get.php", {
 				u_id: u_id,
 			}, function(res) {
-                $objNotification.noti.items = res.data;
+				$objNotification.noti.items = res.noti;
+				sum_qty();
+				$objNotification.sale.items = res.sale;
 				if(callback) callback(res.data);
 			}, function(res) {
 				$ksFactory.alert("Error เนื่องจาก "+res);
 			}, true);
 		});
 	}
-	/*$objNotification.add = function(user, p_id, callback) {
-		var u_id = ( !user ) ? "" : user.u_id;
-		$ksFactory.http($rootScope.URL+"cart_add.php", {
-			u_id: u_id,
-			p_id: p_id,
-			uuid: $rootScope.DEVICE.uuid
-		}, function(res) {
-			$objCart.get(user, function() {
-				if(callback) callback();
-			});
-		}, function(res) {
-			$ksFactory.alert("Error เนื่องจาก "+res);
-		}, true);
-	}
-	$objNotification.del = function(user, p_id, callback) {
-		var u_id = ( !user ) ? "" : user.u_id;
-		$ksFactory.http($rootScope.URL+"cart_del.php", {
-			u_id: u_id,
-			p_id: p_id,
-			uuid: $rootScope.DEVICE.uuid
-		}, function(res) {
-			$objCart.get(user, function() {
-				if(callback) callback();
-			});
-		}, function(res) {
-			$ksFactory.alert("Error เนื่องจาก "+res);
-		}, true);
-	}
-	$objNotification.del_all = function(user, p_id, callback) {
-		var u_id = ( !user ) ? "" : user.u_id;
-		$ksFactory.http($rootScope.URL+"cart_del_all.php", {
-			u_id: u_id,
-			p_id: p_id,
-			uuid: $rootScope.DEVICE.uuid
-		}, function(res) {
-			$objCart.get(user, function() {
-				if(callback) callback();
-			});
-		}, function(res) {
-			$ksFactory.alert("Error เนื่องจาก "+res);
-		}, true);
-	}*/
 	return $objNotification;
 })
 

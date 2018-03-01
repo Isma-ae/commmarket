@@ -25,6 +25,9 @@
         )
     ";
     if( $DATABASE->Query( $sql ) ) {
+        if( !is_dir($folder) ) {
+            mkdir($folder, 0700);
+        }
         move_uploaded_file($tmp_name, $folder.$image);
         echo "Y";
     } else {

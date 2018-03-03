@@ -7,8 +7,8 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('app', ['ionic', 'ngCordova','app.controllers', 'app.routes', 'app.services', 'app.directives', 'ksLibrary'])
     .run(function ($ionicPlatform, $rootScope, $cordovaDevice, $ksFactory, $cart, $notification, $location) {
-        $rootScope.URL = "http://desktop-7ir60kp/server/";
-        //$rootScope.URL = "http://172.20.10.11/server/";
+        //$rootScope.URL = "http://desktop-7ir60kp/server/";
+        $rootScope.URL = "http://192.168.1.36/server/";
         $rootScope.MESSAGE = {
             ERROR1 : "ติดต่อแม่ข่ายไม่ได้",
             NOPERMIT : "กรุณาเข้าสู่ระบบก่อนใช้งาน",
@@ -52,7 +52,7 @@ angular.module('app', ['ionic', 'ngCordova','app.controllers', 'app.routes', 'ap
             }
 
 
-            
+
             $cart.get($rootScope.USER);
             $notification.get($rootScope.USER);
             $location.path("/tab/home");

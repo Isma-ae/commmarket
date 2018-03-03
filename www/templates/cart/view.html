@@ -3,21 +3,22 @@
 		<a class="button icon-left ion-ios-arrow-left button-clear text-white" ng-click="goBack()">กลับ</a>
 	</ion-nav-buttons>
 	<ion-content class="has-header my-content" ng-class="{'has-footer':cart.items.length>0}">
-		<div class="text-center" ng-show="cart.items.length==0">No data</div>
+		<div class="text-center padding" ng-show="cart.items.length==0">
+            <p>ไม่มีสินค้าในตะกร้าของคุณ</p>
+            <button class="button button-orange" ng-click="goBack()">เลือกสินค้า</button>
+        </div>
 		<div ng-repeat="item in cart.items">
 			<div class="list">
-				<a class="item item-thumbnail-left my-item" >
+				<a class="item item-thumbnail-left item-icon-right" >
 					<img ng-src="{{ URL+'files/products/'+item.p_image }}" err-src="img/no-image.png">
-					<h2>{{item.p_name}} </h2>
+					<h2 style="color:#ff4600">{{item.p_name}} </h2>
 					<p>{{item.c_qty|number}} x  {{item.p_price|number:2}} =
 						<strong>  {{ item.c_price|number:2 }}</strong> บาท
 					</p>
-					<div class="button-bar" style="font-size:10px;margin-top:-10px;">
-						<button class="button button-stable button-clear button-block button-small icon ion-plus" ng-click="add(item.p_id)"></button>
-						<button class="button button-stable button-clear button-block button-small">{{item.c_qty|number}}</button>
-						<button class="button button-stable button-clear button-block  icon ion-minus" ng-click="del(item.p_id)"></button>
-					</div>
-					<button class="button button-stable button-clear" ng-click="delAll(item.p_id)">ลบทั้งหมด</button>
+						<button class="button button-small button-energized button-outline ion-plus" ng-click="add(item.p_id)"></button>
+						<button class="button button-stable button-clear button-small">{{item.c_qty|number}}</button>
+                        <button class="button button-small button-energized button-outline ion-minus" ng-click="del(item.p_id)"></button>
+                    <i class="icon ion-ios-trash" ng-click="delAll(item.p_id)" style="color:#ff4600"></i>
 				</a>
 			</div>
 		</div>
@@ -28,6 +29,6 @@
 				<strong> {{cart.price|number:2}} บาท</strong>
 			</p>
 		</div>
-		<button class="button button-assertive pull-right" ng-click="checkout()">ชำระเงิน</button>
+		<button class="button button-assertive pull-right" ng-click="checkout()">ยืนยันสั่งซื้อ</button>
 	</div>
 </ion-view>
